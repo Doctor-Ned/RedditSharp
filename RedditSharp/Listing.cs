@@ -311,7 +311,7 @@ namespace RedditSharp
                 }
                 if (json["kind"].ValueOrDefault<string>() != "Listing")
                 {
-                    throw new FormatException("Reddit responded with an object that is not a listing.");
+                    throw new FormatException("Reddit responded with an object that is not a listingStream.");
                 }
 
                 Parse(json);
