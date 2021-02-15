@@ -50,6 +50,7 @@ namespace RedditSharp.Things
         private string SubredditNewUrl => $"/r/{Name}/new.json?sort=new";
         private string SubredditHotUrl => $"/r/{Name}/hot.json"; // this is the default sort?
         private string SubredditRisingUrl => $"/r/{Name}/rising.json";
+        private string SubredditRandomUrl => $"/r/{Name}/random.json";
         private string SubredditTopUrl => $"/r/{Name}/top.json";
         private string SubredditControversialUrl => $"/r/{Name}/controversial.json";
         private string SubredditGildedUrl => $"/r/{Name}/gilded.json";
@@ -359,6 +360,18 @@ namespace RedditSharp.Things
             return null;
         }
 
+        /// <summary>
+        /// Get random posts on a subreddit.
+        /// </summary>
+        /// <param name="max">Maximum number of records to return.  -1 for unlimited.</param>
+        public Listing<Post> GetRandomPosts(int max = -1)
+        {
+            if (Name == "/") {
+                return Listing<Post>.Create(WebAgent, "/.json", max, 100);
+            }
+
+            return Listing<Post>.Create(WebAgent, SubredditRandomUrl, max, 100);
+        }
 
         /// <summary>
         /// List of gilded things

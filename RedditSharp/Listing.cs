@@ -279,6 +279,10 @@ namespace RedditSharp
                 url = AppendCommonParams(url);
                 var json = await Listing.WebAgent.Get(url).ConfigureAwait(false);
                 //json = json.Last();
+                if (json.Type == JTokenType.Array && json.Any())
+                {
+                    json = json[0];
+                }
                 if (json["kind"].ValueOrDefault<string>() != "Listing")
                 {
                     throw new FormatException("Reddit responded with an object that is not a listing.");
@@ -300,9 +304,14 @@ namespace RedditSharp
                 }
                 url = AppendCommonParams(url);
                 var json = await Listing.WebAgent.Get(url).ConfigureAwait(false);
+
+                if (json.Type == JTokenType.Array && json.Any())
+                {
+                    json = json[0];
+                }
                 if (json["kind"].ValueOrDefault<string>() != "Listing")
                 {
-                    throw new FormatException("Reddit responded with an object that is not a listingStream.");
+                    throw new FormatException("Reddit responded with an object that is not a listing.");
                 }
 
                 Parse(json);
