@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using RedditSharp.Things.User;
 using System;
 
@@ -19,11 +18,5 @@ namespace RedditSharp.Things
         /// </summary>
         [Obsolete("User RelUser.Date")]
         public DateTime? BanDate { get => DateUTC; private set => DateUTC = value; }
-
-        /// <summary>
-        /// Ban note.
-        /// </summary>
-        [JsonProperty("note")]
-        public string Note { get; private set; }
     }
 }
